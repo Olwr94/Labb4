@@ -10,44 +10,47 @@ namespace Lab
     {
         static void Main(string[] args)
         {
+            Walls walls = new Walls();
+            
 
+            Console.ReadLine();
         }
     }
     public class Character
     {
-
+        int numberOfMoves;
+        int amountOfKeys;
     }
     public abstract class Map
     {
-        private static string[] map = new string[80 + 1];
+        public static string[,] map = new string[80 , 40];
     }
+    
     public class Walls : Map
     {
-        public void PrintWalls()
-        {
-            Console.WriteLine();
-            
-        }
+        
     }
     public class Rooms : Map
     {
-
+        
     }
     public class Doors : Map
     {
-
+        
     }
     public class Keys : Map
     {
-
+        
     }
     public class Monster : Map
     {
-
+        
     }
     public class Secrets : Map
     {
+        public void ShowSecret()
+        {
 
+        }
     }
-
 }
