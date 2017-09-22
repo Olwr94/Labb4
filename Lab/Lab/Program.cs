@@ -11,6 +11,7 @@ namespace Lab
 
         enum Walls {wall = "#"};
 
+
         static void Main(string[] args)
         {
             for (int rad = 0; rad < 20; rad++)
@@ -35,13 +36,15 @@ namespace Lab
     }
     public abstract class Map
     {
-        private static string[,] map = new string[80,40];
+
+        private static string[,] map = new string[80, 40];
+
     }
     public class Walls : Map
     {
         public void PrintWalls()
         {
-            Console.WriteLine();
+            
             
         }
     }
