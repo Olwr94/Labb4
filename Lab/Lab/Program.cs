@@ -8,7 +8,8 @@ namespace Lab
 {
     class Program
     {
-        
+
+        enum Walls {wall = "#"};
 
         static void Main(string[] args)
         {
@@ -25,53 +26,14 @@ namespace Lab
     }
     public abstract class Map
     {
-        public static string[,] map = new string[80,20];
+        private static string[,] map = new string[80,40];
     }
     public class Walls : Map
     {
         public void PrintWalls()
         {
-
-            for (int rad = 0; rad < map.GetLength(1); rad++)
-            {
-                for (int kolumn = 0; kolumn < map.GetLength(0); kolumn++)
-                {
-                    if (rad == 19 || rad == 0)/*((rad + kolumn) % 2 == 0)*/
-                    {
-                        Console.Write("#");
-                        //map[rad, kolumn] = x;
-                        //Console.Write(map[rad, kolumn]);
-                    }
-                    else if (kolumn == 79 || kolumn == 0)/*kolumn-9*/
-                    {
-                        Console.Write("#");
-                    }
-                    else
-                    {
-                        Console.Write(" ");
-                        //map[rad, kolumn] = o;
-
-                        //Console.Write(map[rad, kolumn]);
-                    }
-                }
-                Console.WriteLine("");
-            }
-
-
-            //for (int rad = 0; rad < 20; rad++)
-            //{
-            //    for (int kolumn = 0; kolumn < 80; kolumn++)
-            //    {
-            //        if (rad == 19 || rad == 0)//kolumn
-            //            Console.Write("#");
-            //        else if (kolumn == 79 || kolumn == 0)/*kolumn-9*/
-            //            Console.Write("#");
-            //        else
-            //            Console.Write(" ");
-            //    }
-            //    Console.WriteLine("");
-            //}
-
+            Console.WriteLine();
+            
         }
     }
     public class Rooms : Map
