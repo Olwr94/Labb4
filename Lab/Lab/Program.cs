@@ -13,13 +13,21 @@ namespace Lab
 
         }
     }
-    public abstract class Map
+    public class Character
     {
 
     }
+    public abstract class Map
+    {
+        private static string[] map = new string[80 + 1];
+    }
     public class Walls : Map
     {
-
+        public void PrintWalls()
+        {
+            Console.WriteLine();
+            
+        }
     }
     public class Rooms : Map
     {
@@ -29,4 +37,17 @@ namespace Lab
     {
 
     }
+    public class Keys : Map
+    {
+
+    }
+    public class Monster : Map
+    {
+
+    }
+    public class Secrets : Map
+    {
+
+    }
+
 }
