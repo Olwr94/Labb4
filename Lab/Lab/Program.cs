@@ -8,7 +8,7 @@ namespace Lab
 {
     class Program
     {
-        
+        enum Walls {  };
 
         static void Main(string[] args)
         {
