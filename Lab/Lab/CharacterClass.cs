@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class Class1
+    public class Character
     {
+        int numberOfMoves;
+        int amountOfKeys;
     }
 }
