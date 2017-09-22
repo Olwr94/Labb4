@@ -8,6 +8,8 @@ namespace Lab
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
 
@@ -19,13 +21,13 @@ namespace Lab
     }
     public abstract class Map
     {
-        private static string[] map = new string[80 + 1];
+        private static string[,] map = new string[80, 40];
     }
     public class Walls : Map
     {
         public void PrintWalls()
         {
-            Console.WriteLine();
+            
             
         }
     }
