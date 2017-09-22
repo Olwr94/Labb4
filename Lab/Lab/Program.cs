@@ -8,9 +8,7 @@ namespace Lab
 {
     class Program
     {
-
-        enum Walls {wall = "#"};
-
+        enum Walls {  };
 
         static void Main(string[] args)
         {
