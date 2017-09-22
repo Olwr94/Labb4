@@ -13,4 +13,20 @@ namespace Lab
 
         }
     }
+    public abstract class Map
+    {
+
+    }
+    public class Walls : Map
+    {
+
+    }
+    public class Rooms : Map
+    {
+
+    }
+    public class Doors : Map
+    {
+
+    }
 }
