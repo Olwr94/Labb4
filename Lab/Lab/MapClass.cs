@@ -15,54 +15,70 @@ namespace Lab
     {
         public void PrintWalls()
         {
-            for (int rad = 0; rad < map.GetLength(1); rad++)
+            const int ROWS = 16, COLUMNS = 36;
+            char[,] map = new char[COLUMNS, ROWS];
+            int playerRow = 3, playerColumn = 11;
+
+            for (int row = 0; row < ROWS; row++)
             {
-                for (int kolumn = 0; kolumn < map.GetLength(0); kolumn++)
+                for (int column = 0; column < COLUMNS; column++)
                 {
-                    if (rad == 19 || rad == 0)/*((rad + kolumn) % 2 == 0)*/
-                    {
-                        Console.Write("#");
-                        //map[rad, kolumn] = x;
-                        //Console.Write(map[rad, kolumn]);
-                    }
-                    else if (kolumn == 79 || kolumn == 0)/*kolumn-9*/
-                    {
-                        Console.Write("#");
-                    }
+                    //OBS använd objekt i labben istället!
+                    if (row == 0 || row == ROWS - 1 || column == 0 || column == COLUMNS - 1)
+                        map[column, row] = '#';
+
                     else
-                    {
-                        Console.Write(" ");
-                        //map[rad, kolumn] = o;
-
-                        //Console.Write(map[rad, kolumn]);
-                    }
+                        map[column, row] = '-';
                 }
-                Console.WriteLine("");
-
             }
-        }
-    }
-    public class Rooms : Map
-    {
 
-    }
-    public class Doors : Map
-    {
 
-    }
-    public class Keys : Map
-    {
+            while (true) //TODO: hur ska användaren avsluta?
+            {
+                //Rita ut karta
+                string buffer = "";
+                for (int row = 0; row < ROWS; row++)
+                {
+                    string line = "";
+                    for (int column = 0; column < COLUMNS; column++)
+                    {
+                        if (column == playerColumn && row == playerRow)
+                            line += "@";
+                        else
+                            line += map[column, row];
+                    }
+                    buffer += line + "\n";
+                }
+                Console.CursorLeft = 0;
+                Console.CursorTop = 0;
+                Console.Write(buffer);
 
-    }
-    public class Monster : Map
-    {
-
-    }
-    public class Secrets : Map
-    {
-        public void ShowSecret()
-        {
-
+                var key = Console.ReadKey();
+                if (key.Key == ConsoleKey.W)
+                {
+                    playerRow--;
+                    if (playerRow == ROWS - ROWS)
+                        playerRow++;
+                }
+                else if (key.Key == ConsoleKey.A)
+                {
+                    playerColumn--;
+                    if (playerColumn == COLUMNS - COLUMNS)
+                        playerColumn++;
+                }
+                else if (key.Key == ConsoleKey.S)
+                {
+                    playerRow++;
+                    if (playerRow == ROWS - 1)
+                        playerRow--;
+                }
+                else if (key.Key == ConsoleKey.D)
+                {
+                    playerColumn++;
+                    if (playerColumn == COLUMNS - 1)
+                        playerColumn--;
+                }
+            }
         }
     }
 }

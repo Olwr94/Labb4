@@ -11,7 +11,6 @@ namespace Lab
         static void Main(string[] args)
         {
             Walls walls = new Walls();
-          
             walls.PrintWalls();
 
             Console.ReadLine();
