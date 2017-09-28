@@ -23,7 +23,6 @@ namespace Lab
             {
                 for (int column = 0; column < COLUMNS; column++)
                 {
-                    //OBS använd objekt i labben istället!
                     if (row == 0 || row == ROWS - 1 || column == 0 || column == COLUMNS - 1)
                         map[column, row] = '#';
 
@@ -33,13 +32,13 @@ namespace Lab
             }
 
 
-            while (true) //TODO: hur ska användaren avsluta?
+            while (true) 
             {
                 //Rita ut karta
                 string buffer = "";
                 for (int row = 0; row < ROWS; row++)
                 {
-                    string line = "";
+                    string line = string.Empty;
                     for (int column = 0; column < COLUMNS; column++)
                     {
                         if (column == playerColumn && row == playerRow)
