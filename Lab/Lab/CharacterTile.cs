@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class Program
+    class CharacterTile : Tile
     {
-        static void Main(string[] args)
+        public CharacterTile()
         {
-            Map map = new Map();
-            map.MapArray();
- 
-            Console.ReadLine();
+            Symbol = '@';
         }
     }
 }

@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class Program
+    abstract class Tile : Map, ITiles
     {
-        static void Main(string[] args)
+        public char Symbol { get; set; }
+
+        public void Print()
         {
-            Map map = new Map();
-            map.MapArray();
- 
-            Console.ReadLine();
+            Console.Write(Symbol);
         }
     }
 }

@@ -6,14 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class Program
+    class FloorTile : Tile
     {
-        static void Main(string[] args)
+        public FloorTile()
         {
-            Map map = new Map();
-            map.MapArray();
- 
-            Console.ReadLine();
+            Symbol = '.';
         }
     }
 }
