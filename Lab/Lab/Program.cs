@@ -12,7 +12,7 @@ namespace Lab
         {
             Map map = new Map();
             map.MapArray();
- 
+
             Console.ReadLine();
         }
     }

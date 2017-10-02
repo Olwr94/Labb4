@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    abstract class Tile : Map, ITiles
+    public abstract class Tile : Map, ITiles
     {
         public char Symbol { get; set; }
 
