@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab
-{
+{ 
     interface ITiles
     {
         void Print(); 

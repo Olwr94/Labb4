@@ -11,7 +11,7 @@ namespace Lab
         public DoorTile()
         {
             IsVisible = true;
-            Color = ConsoleColor.White;
+            Color = ConsoleColor.White; 
             Symbol = (char)Tiles.door;
             CanCollide = true;
         }
