@@ -44,7 +44,7 @@ namespace Lab
                         map[kolumn, rad] = keytile;
 
                     //Exit
-                    else if (rad == 1 && kolumn == 1|| rad == 2 && kolumn == 2 || rad == 1 && kolumn == 2 || rad == 2 && kolumn == 1)
+                    else if (rad == 1 && kolumn == 1)
                         map[kolumn, rad] = exit;
 
                     //Inner walls
@@ -60,7 +60,7 @@ namespace Lab
             }
 
 
-            while (!map[playerColumn, playerRow - 1].HasExit) //TODO: hur ska användaren avsluta?
+            while (!exit.HasExit) //TODO: hur ska användaren avsluta?
             {
                 
                 //Rita ut karta
@@ -104,12 +104,15 @@ namespace Lab
                             playerRow--;
                             charactertile.Score++;
                         }
-                            
+
                         else if (map[playerColumn, playerRow - 1] == doortile && keytile.pickedUp)
                         {
                             playerRow--;
                             map[playerColumn, playerRow] = floortile;
                         }
+
+                        if (map[playerColumn, playerRow] == exit)
+                            exit.HasExit = true;
                         break;
                      
                      case ConsoleKey.A:
@@ -124,6 +127,9 @@ namespace Lab
                             playerColumn--;
                             map[playerColumn, playerRow] = floortile;
                         }
+
+                        if (map[playerColumn, playerRow] == exit)
+                            exit.HasExit = true;
                         break;
 
                      case ConsoleKey.S:
@@ -132,6 +138,10 @@ namespace Lab
                             playerRow++;
                             charactertile.Score++;
                         }
+
+
+                        if (map[playerColumn, playerRow] == exit)
+                            exit.HasExit = true;
                         break;
 
                      case ConsoleKey.D:
@@ -140,12 +150,14 @@ namespace Lab
                             playerColumn++;
                             charactertile.Score++;
                          }
+
+
+                        if (map[playerColumn, playerRow] == exit)
+                            exit.HasExit = true;
                         break;
 
                 }
-
-                if (map[playerColumn, playerRow] == exit)
-                    exit.HasExit = true;
+                
             }
 
             Console.Clear();
