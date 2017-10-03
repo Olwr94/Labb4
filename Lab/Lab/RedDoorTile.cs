@@ -6,16 +6,14 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class ExitTile: Tile, ITiles
+    class RedDoorTile : Tile , ITiles
     {
-
-        
-        public ExitTile()
+        public RedDoorTile()
         {
             IsVisible = true;
-            Color = ConsoleColor.White;
-            Symbol = (char)Tiles.exit;
-            HasExit = false;
+            Color = ConsoleColor.Red;
+            Symbol = (char)Tiles.door;
+            CanCollide = true;
         }
 
         public void Print()

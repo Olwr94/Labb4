@@ -10,6 +10,8 @@ namespace Lab
     {
         public WallTile()
         {
+            IsVisible = true;
+            Color = ConsoleColor.White;
             Symbol = (char)Tiles.wall;
             CanCollide = true;
         }

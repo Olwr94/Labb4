@@ -10,6 +10,8 @@ namespace Lab
     {
         public FloorTile()
         {
+            IsVisible = true;
+            Color = ConsoleColor.White;
             Symbol = (char)Tiles.floor;
         }
 
