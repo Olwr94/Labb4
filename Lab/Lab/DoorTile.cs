@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class CharacterTile : Tile, ITiles
+    class DoorTile : Tile, ITiles
     {
-        public CharacterTile()
+        public DoorTile()
         {
-            Symbol = (char)Tiles.character; 
+            Symbol = (char)Tiles.door;
+            CanCollide = true;
         }
+
         public void Print()
         {
-            Console.Write(Symbol);
+            Console.Write(Symbol); 
         }
     }
 }

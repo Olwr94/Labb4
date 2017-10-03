@@ -16,7 +16,7 @@ namespace Lab
 
         public void Print()
         {
-            Console.Write(Symbol);
+            Console.Write(Symbol); 
         }
     }
 }
