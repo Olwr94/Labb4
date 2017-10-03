@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class WallTile : Tile, ITiles
+    class RedKeyTile : Tile , ITiles
     {
-        public WallTile()
+        public bool pickedUp = false;
+        public RedKeyTile()
         {
             IsVisible = true;
-            Color = ConsoleColor.White; 
-            Symbol = (char)Tiles.wall;
-            CanCollide = true;
+            Color = ConsoleColor.Red;
+            Symbol = (char)Tiles.key;
+
         }
 
         public void Print()
         {
-            Console.Write(Symbol); 
+            Console.Write(Symbol);
         }
     }
 }

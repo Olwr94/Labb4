@@ -18,9 +18,10 @@ namespace Lab
         WallTile walltile = new WallTile();
         FloorTile floortile = new FloorTile();
         CharacterTile charactertile = new CharacterTile();
+        RedDoorTile redDoor = new RedDoorTile();
         DoorTile doortile = new DoorTile();
-        DoorTile doortile1 = new DoorTile();
         KeyTile keytile = new KeyTile();
+        RedKeyTile redKey = new RedKeyTile();
         ExitTile exit = new ExitTile();
 
         public void MapArray()
@@ -35,13 +36,15 @@ namespace Lab
                     }
                     //Door
                     else if (rad == 5 && kolumn == 3) //Skapar dörröppning
-                        map[kolumn, rad] = doortile1;
-                    else if (rad == 3 && kolumn == 2)
                         map[kolumn, rad] = doortile;
+                    else if (rad == 3 && kolumn == 2)
+                        map[kolumn, rad] = redDoor;
 
                     //Keys
                     else if (rad == 1 && kolumn == 30)
                         map[kolumn, rad] = keytile;
+                    else if (rad == 12 && kolumn == 33)
+                        map[kolumn, rad] = redKey;
 
                     //Exit
                     else if (rad == 1 && kolumn == 1)
@@ -62,25 +65,23 @@ namespace Lab
 
             while (!exit.HasExit) //TODO: hur ska användaren avsluta?
             {
-                
+
                 //Rita ut karta
-                string buffer = "";
+                Console.SetCursorPosition(0, 0);
                 for (int rad = 0; rad < Rad; rad++)
                 {
-                    string line = "";
                     for (int kolumn = 0; kolumn < Kolumn; kolumn++)
                     {
                         if (kolumn == playerColumn && rad == playerRow)
-                            line += charactertile.Symbol;
+                            charactertile.Draw();
 
                         else
-                            line += map[kolumn, rad].Symbol;
+                            map[kolumn, rad].Draw();
                     }
-                    buffer += line + "\n";
+                    Console.WriteLine();
                 }
                 Console.CursorLeft = 0;
                 Console.CursorTop = 0;
-                Console.Write(buffer);
                 Console.SetCursorPosition(0, 16);
                 Console.CursorVisible = false;
 
@@ -94,8 +95,15 @@ namespace Lab
                     charactertile.Score = charactertile.Score - 10;
                 }
 
-                
-                    var player = Console.ReadKey(true);
+                if (map[playerColumn, playerRow] == redKey)
+                {
+                    map[playerColumn, playerRow] = floortile;
+                    redKey.pickedUp = true;
+                    charactertile.Score = charactertile.Score - 10;
+                }
+
+
+                var player = Console.ReadKey(true);
                 switch(player.Key)
                 {
                      case ConsoleKey.W:
@@ -104,8 +112,8 @@ namespace Lab
                             playerRow--;
                             charactertile.Score++;
                         }
-
-                        else if (map[playerColumn, playerRow - 1] == doortile && keytile.pickedUp)
+ 
+                        else if (map[playerColumn, playerRow - 1] == redDoor && redKey.pickedUp)
                         {
                             playerRow--;
                             map[playerColumn, playerRow] = floortile;
@@ -122,7 +130,7 @@ namespace Lab
                             charactertile.Score++;
                         }
                             
-                        else if(map[playerColumn - 1, playerRow] == doortile1 && keytile.pickedUp)
+                        else if(map[playerColumn - 1, playerRow] == doortile && keytile.pickedUp)
                         {
                             playerColumn--;
                             map[playerColumn, playerRow] = floortile;

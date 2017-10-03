@@ -12,10 +12,35 @@ namespace Lab
         {
             wall = '#',
             floor = '.',
-            redkey = 'k',
+            key = 'k', 
             door = 'D',
             exit = 'E',
             character = '@'
+        }
+
+        private bool isVisible = false;
+
+        public bool IsVisible
+        {
+            get { return isVisible; }
+            set { isVisible = value; }
+        }
+
+        private ConsoleColor color;
+        public ConsoleColor Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+
+        public void Draw()
+        {
+            Console.ForegroundColor = Color;
+            if (isVisible)
+                Console.Write(Symbol);
+            else
+                Console.Write(" ");
+            Console.ResetColor();
         }
 
         private char symbol; 

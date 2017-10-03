@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class WallTile : Tile, ITiles
+    class RedDoorTile : Tile , ITiles
     {
-        public WallTile()
+        public RedDoorTile()
         {
             IsVisible = true;
-            Color = ConsoleColor.White; 
-            Symbol = (char)Tiles.wall;
+            Color = ConsoleColor.Red;
+            Symbol = (char)Tiles.door;
             CanCollide = true;
         }
 
         public void Print()
         {
-            Console.Write(Symbol); 
+            Console.Write(Symbol);
         }
     }
 }

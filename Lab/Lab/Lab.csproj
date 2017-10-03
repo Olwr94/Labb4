@@ -51,6 +51,8 @@
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RedDoorTile.cs" />
+    <Compile Include="RedKeyTile.cs" />
     <Compile Include="Tile.cs" />
     <Compile Include="WallTile.cs" />
   </ItemGroup>

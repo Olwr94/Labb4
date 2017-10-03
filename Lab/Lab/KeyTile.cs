@@ -12,7 +12,9 @@ namespace Lab
         public bool pickedUp = false;
         public KeyTile()
         {
-            Symbol = (char)Tiles.redkey;
+            Color = ConsoleColor.White; 
+            IsVisible = true;
+            Symbol = (char)Tiles.key;
             
         }
 
