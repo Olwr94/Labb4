@@ -18,6 +18,7 @@ namespace Lab
         WallTile walltile = new WallTile();
         FloorTile floortile = new FloorTile();
         CharacterTile charactertile = new CharacterTile();
+        DoorTile door = new DoorTile();
 
         public void MapArray()
         {
@@ -30,7 +31,7 @@ namespace Lab
                         map[kolumn, rad] = walltile;
                     }
                     else if(rad == 7 && kolumn == 5) //Skapar dörröppning
-                        map[kolumn, rad] = floortile;
+                        map[kolumn, rad] = door;
                     else if(kolumn == 5)
                         map[kolumn, rad] = walltile;
                     else

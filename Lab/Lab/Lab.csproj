@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterTile.cs" />
+    <Compile Include="DoorTile.cs" />
     <Compile Include="FloorTile.cs" />
     <Compile Include="ITiles.cs" />
     <Compile Include="Map.cs" />

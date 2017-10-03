@@ -17,7 +17,7 @@ namespace Lab
             character = '@'
         }
 
-        private char symbol;
+        private char symbol; 
 
         public char Symbol 
         { 
