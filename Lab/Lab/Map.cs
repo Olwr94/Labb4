@@ -8,33 +8,38 @@ namespace Lab
 {
     public class Map
     {
-        char[,] map;
+        const int Rad = 16;
+        const int Kolumn = 36;
+        int playerRow = 3;
+        int playerColumn = 11;
+
+        Tile[,] map = new Tile[Kolumn, Rad];
+
         WallTile walltile = new WallTile();
         FloorTile floortile = new FloorTile();
         CharacterTile charactertile = new CharacterTile();
 
         public void MapArray()
         {
-            const int Rad = 16;
-            const int Kolumn = 36;
-            int playerRow = 3;
-            int playerColumn = 11;
-            map = new char[Rad, Kolumn];
-            
             for(int rad = 0; rad < Rad; rad++)
             {
                 for(int kolumn = 0; kolumn < Kolumn; kolumn++)
                 {
                     if(rad == 0 || rad == Rad - 1 || kolumn == 0 || kolumn == Kolumn - 1)
                     {
-                        map[kolumn, rad] = walltile.Symbol;
+                        map[kolumn, rad] = walltile;
                     }
+                    else if(rad == 7 && kolumn == 5) //Skapar dörröppning
+                        map[kolumn, rad] = floortile;
+                    else if(kolumn == 5)
+                        map[kolumn, rad] = walltile;
                     else
                     {
-                        map[kolumn, rad] = floortile.Symbol;
+                        map[kolumn, rad] = floortile;
                     }
                 }
             }
+
 
             while (true) //TODO: hur ska användaren avsluta?
             {
@@ -47,40 +52,42 @@ namespace Lab
                     {
                         if (kolumn == playerColumn && rad == playerRow)
                             line += charactertile.Symbol;
+
                         else
-                            line += map[kolumn, rad];
+                            line += map[kolumn, rad].Symbol;
                     }
                     buffer += line + "\n";
                 }
                 Console.CursorLeft = 0;
                 Console.CursorTop = 0;
                 Console.Write(buffer);
+                
+                
+                var player = Console.ReadKey();
+                switch(player.Key)
+                {
+                     case ConsoleKey.W:
+                        if(!map[playerColumn, playerRow - 1].CanCollide)
+                            playerRow--;
+                        break;
+                     
+                     case ConsoleKey.A:
+                        if(!map[playerColumn - 1, playerRow].CanCollide)
+                            playerColumn--;
+                        break;
 
-                var key = Console.ReadKey();
-                if (key.Key == ConsoleKey.W)
-                {
-                    playerRow--;
-                    if (playerRow == Rad - Rad)
-                        playerRow++;
+                     case ConsoleKey.S:
+                        if(!map[playerColumn, playerRow + 1].CanCollide)
+                            playerRow++;
+                        break;
+
+                     case ConsoleKey.D:
+                         if(!map[playerColumn + 1, playerRow].CanCollide)
+                            playerColumn++;
+                        break;
+
                 }
-                else if (key.Key == ConsoleKey.A)
-                {
-                    playerColumn--;
-                    if (playerColumn == Kolumn - Kolumn)
-                        playerColumn++;
-                }
-                else if (key.Key == ConsoleKey.S)
-                {
-                    playerRow++;
-                    if (playerRow == Rad - 1)
-                        playerRow--;
-                }
-                else if (key.Key == ConsoleKey.D)
-                {
-                    playerColumn++;
-                    if (playerColumn == Kolumn - 1)
-                        playerColumn--;
-                }
+	            
             }
         }
     }
