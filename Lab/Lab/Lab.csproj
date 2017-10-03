@@ -44,9 +44,10 @@
   <ItemGroup>
     <Compile Include="CharacterTile.cs" />
     <Compile Include="DoorTile.cs" />
+    <Compile Include="ExitTile.cs" />
     <Compile Include="FloorTile.cs" />
     <Compile Include="ITiles.cs" />
-    <Compile Include="Key%28s%29.cs" />
+    <Compile Include="KeyTile.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -14,6 +14,7 @@ namespace Lab
             floor = '.',
             redkey = 'k',
             door = 'D',
+            exit = 'E',
             character = '@'
         }
 
@@ -32,5 +33,13 @@ namespace Lab
             get { return canCollide;}
             set { canCollide = value;}
         }
+
+        private bool hasExit;
+        public bool HasExit
+        {
+            get { return hasExit; }
+            set { hasExit = value; }
+        }
+
     }
 }
