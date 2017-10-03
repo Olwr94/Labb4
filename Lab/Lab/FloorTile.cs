@@ -12,7 +12,7 @@ namespace Lab
         {
             IsVisible = true;
             Color = ConsoleColor.White;
-            Symbol = (char)Tiles.floor;
+            Symbol = (char)Tiles.floor; 
         }
 
         public void Print()

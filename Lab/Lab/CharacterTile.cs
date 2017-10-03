@@ -16,7 +16,7 @@ namespace Lab
         }
         public CharacterTile()
         {
-            IsVisible = true;
+            IsVisible = true; 
             Color = ConsoleColor.White;
             Symbol = (char)Tiles.character;
             Score = 0;

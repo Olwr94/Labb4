@@ -12,7 +12,7 @@ namespace Lab
         {
             wall = '#',
             floor = '.',
-            key = 'k',
+            key = 'k', 
             door = 'D',
             exit = 'E',
             character = '@'

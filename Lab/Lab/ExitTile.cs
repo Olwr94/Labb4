@@ -8,7 +8,7 @@ namespace Lab
 {
     class ExitTile: Tile, ITiles
     {
-
+         
         
         public ExitTile()
         {

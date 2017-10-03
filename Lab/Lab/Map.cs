@@ -112,7 +112,7 @@ namespace Lab
                             playerRow--;
                             charactertile.Score++;
                         }
-
+ 
                         else if (map[playerColumn, playerRow - 1] == redDoor && redKey.pickedUp)
                         {
                             playerRow--;
