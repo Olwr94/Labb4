@@ -18,7 +18,10 @@ namespace Lab
         WallTile walltile = new WallTile();
         FloorTile floortile = new FloorTile();
         CharacterTile charactertile = new CharacterTile();
-        DoorTile door = new DoorTile();
+        DoorTile doortile = new DoorTile();
+        DoorTile doortile1 = new DoorTile();
+        KeyTile keytile = new KeyTile();
+        ExitTile exit = new ExitTile();
 
         public void MapArray()
         {
@@ -26,14 +29,29 @@ namespace Lab
             {
                 for(int kolumn = 0; kolumn < Kolumn; kolumn++)
                 {
-                    if(rad == 0 || rad == Rad - 1 || kolumn == 0 || kolumn == Kolumn - 1)
+                    if (rad == 0 || rad == Rad - 1 || kolumn == 0 || kolumn == Kolumn - 1)
                     {
                         map[kolumn, rad] = walltile;
                     }
-                    else if(rad == 7 && kolumn == 5) //Skapar dörröppning
-                        map[kolumn, rad] = door;
-                    else if(kolumn == 5)
+                    //Door
+                    else if (rad == 5 && kolumn == 3) //Skapar dörröppning
+                        map[kolumn, rad] = doortile1;
+                    else if (rad == 3 && kolumn == 2)
+                        map[kolumn, rad] = doortile;
+
+                    //Keys
+                    else if (rad == 1 && kolumn == 30)
+                        map[kolumn, rad] = keytile;
+
+                    //Exit
+                    else if (rad == 1 && kolumn == 1|| rad == 2 && kolumn == 2 || rad == 1 && kolumn == 2 || rad == 2 && kolumn == 1)
+                        map[kolumn, rad] = exit;
+
+                    //Inner walls
+                    else if (kolumn == 3 || rad == 3 && kolumn == 1)
                         map[kolumn, rad] = walltile;
+
+                    //Walkable surface
                     else
                     {
                         map[kolumn, rad] = floortile;
@@ -42,8 +60,9 @@ namespace Lab
             }
 
 
-            while (true) //TODO: hur ska användaren avsluta?
+            while (!map[playerColumn, playerRow - 1].HasExit) //TODO: hur ska användaren avsluta?
             {
+                
                 //Rita ut karta
                 string buffer = "";
                 for (int rad = 0; rad < Rad; rad++)
@@ -62,34 +81,77 @@ namespace Lab
                 Console.CursorLeft = 0;
                 Console.CursorTop = 0;
                 Console.Write(buffer);
+                Console.SetCursorPosition(0, 16);
+                Console.CursorVisible = false;
+
+                Console.WriteLine($"Score: {charactertile.Score}");
+
+
+                if(map[playerColumn,playerRow] == keytile)
+                {
+                    map[playerColumn, playerRow] = floortile;
+                    keytile.pickedUp = true;
+                    charactertile.Score = charactertile.Score - 10;
+                }
+
                 
-                
-                var player = Console.ReadKey();
+                    var player = Console.ReadKey(true);
                 switch(player.Key)
                 {
                      case ConsoleKey.W:
                         if(!map[playerColumn, playerRow - 1].CanCollide)
+                        {
                             playerRow--;
+                            charactertile.Score++;
+                        }
+                            
+                        else if (map[playerColumn, playerRow - 1] == doortile && keytile.pickedUp)
+                        {
+                            playerRow--;
+                            map[playerColumn, playerRow] = floortile;
+                        }
                         break;
                      
                      case ConsoleKey.A:
                         if(!map[playerColumn - 1, playerRow].CanCollide)
+                        {
                             playerColumn--;
+                            charactertile.Score++;
+                        }
+                            
+                        else if(map[playerColumn - 1, playerRow] == doortile1 && keytile.pickedUp)
+                        {
+                            playerColumn--;
+                            map[playerColumn, playerRow] = floortile;
+                        }
                         break;
 
                      case ConsoleKey.S:
                         if(!map[playerColumn, playerRow + 1].CanCollide)
+                        {
                             playerRow++;
+                            charactertile.Score++;
+                        }
                         break;
 
                      case ConsoleKey.D:
                          if(!map[playerColumn + 1, playerRow].CanCollide)
+                         {
                             playerColumn++;
+                            charactertile.Score++;
+                         }
                         break;
 
                 }
-	            
+
+                if (map[playerColumn, playerRow] == exit)
+                    exit.HasExit = true;
             }
+
+            Console.Clear();
+            Console.WriteLine("You won!!");
+            Console.WriteLine($"Your score is: {charactertile.Score}");
+
         }
     }
 }

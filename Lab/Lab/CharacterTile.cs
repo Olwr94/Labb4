@@ -8,9 +8,16 @@ namespace Lab
 {
     class CharacterTile : Tile, ITiles
     {
+        private int score;
+        public int Score
+        {
+            get { return score; }
+            set { score = value; }
+        }
         public CharacterTile()
         {
-            Symbol = (char)Tiles.character; 
+            Symbol = (char)Tiles.character;
+            Score = 0;
         }
         public void Print()
         {
