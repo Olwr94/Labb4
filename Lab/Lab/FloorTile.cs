@@ -6,11 +6,16 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class FloorTile : Tile
+    class FloorTile : Tile, ITiles
     {
         public FloorTile()
         {
-            Symbol = '.';
+            Symbol = (char)Tiles.floor;
+        }
+
+        public void Print()
+        {
+            Console.Write(Symbol);
         }
     }
 }

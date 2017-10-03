@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class CharacterTile : Tile
+    class CharacterTile : Tile, ITiles
     {
         public CharacterTile()
         {
-            Symbol = '@';
+            Symbol = (char)Tiles.character;
+        }
+        public void Print()
+        {
+            Console.Write(Symbol);
         }
     }
 }
