@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class TrapTile : Tile , ITiles
+    class VisableFloorTile : Tile , ITiles
     {
-        public TrapTile()
+        public VisableFloorTile()
         {
-            Color = ConsoleColor.Cyan;
+            Color = ConsoleColor.White;
             Symbol = (char)Tiles.floor;
-
         }
 
         public void Print()

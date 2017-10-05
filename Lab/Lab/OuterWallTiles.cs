@@ -11,7 +11,7 @@ namespace Lab
         public OuterWallTile()
         {
             IsVisible = true;
-            Color = ConsoleColor.White;
+            Color = ConsoleColor.DarkMagenta;
             Symbol = (char)Tiles.wall;
             CanCollide = true;
         }

@@ -12,7 +12,7 @@ namespace Lab
         
         public ExitTile()
         {
-            Color = ConsoleColor.White;
+            Color = ConsoleColor.Magenta;
             Symbol = (char)Tiles.exit;
             HasExit = false;
         }

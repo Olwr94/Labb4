@@ -10,7 +10,7 @@ namespace Lab
     {
         public InnerWallTile()
         {
-            Color = ConsoleColor.White; 
+            Color = ConsoleColor.DarkMagenta; 
             Symbol = (char)Tiles.wall;
             CanCollide = true;
         }

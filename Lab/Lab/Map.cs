@@ -3,39 +3,79 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Lab
 {
     public class Map
     {
+        //Random generator
         Random r = new Random();
+
+        //Score penalties
+        int keyPoints = 10;
+        int trapPoints = 30;
+
+        //Secret bonus
+        int lockPickBonus = 20;
+
+
+        //Map array
         const int Rad = 16;
         const int Kolumn = 36;
-        int reducedPoint = 10;
-
         Tile[,] map = new Tile[Kolumn, Rad];
         
+        //Outer walls
         OuterWallTile outerWall = new OuterWallTile();
-        CharacterTile charactertile = new CharacterTile();
-        RedDoorTile redDoor = new RedDoorTile();
-        DoorTile doortile = new DoorTile();
-        KeyTile keytile = new KeyTile();
-        RedKeyTile redKey = new RedKeyTile();
-        ExitTile exit = new ExitTile();
-        TrapTile trapTile = new TrapTile();
 
+        //Floor
+        VisableFloorTile visableFloor = new VisableFloorTile();
+
+        //Character
+        CharacterTile charactertile = new CharacterTile();
+
+        //Doors
+        RedDoorTile redDoor = new RedDoorTile();
+        DoorTile whiteDoor = new DoorTile();
+
+        //Keys
+        KeyTile whiteKey = new KeyTile();
+        RedKeyTile redKey = new RedKeyTile();
         
+
+        //Traps
+        TrapTile trap = new TrapTile();
+        TrapTile trap2 = new TrapTile();
+        TrapTile trap3 = new TrapTile();
+        TrapTile trap4 = new TrapTile();
+
+        //LockPick
+        LockPickTile lockPick = new LockPickTile();
+
+        //Exit
+        ExitTile exit = new ExitTile();
+
+
 
         public void MapArray()
         {
-            int randomRow = r.Next(1, 13);
-            int randomRow2 = r.Next(1, 13);
+            //Keys rows/columns
+            int randomKeyRow = r.Next(1, 13);
+            int randomKeyRow2 = r.Next(1, 13);
+            int randomKeyColumn = r.Next(4, 30);
+            int randomKeyColumn2 = r.Next(4, 30);
+            
+            //Traps rows/columns
             int randomTrapRow = r.Next(1, 13);
             int randomTrapRow2 = r.Next(1, 13);
-            int randomColumn = r.Next(4, 30);
-            int randomColumn2 = r.Next(4, 30);
+            int randomTrapRow3 = r.Next(1, 13);
+            int randomTrapRow4 = r.Next(1, 13);
             int randomTrapColumn = r.Next(4, 30);
             int randomTrapColumn2 = r.Next(4, 30);
+            int randomTrapColumn3 = r.Next(4, 30);
+            int randomTrapColumn4 = r.Next(4, 30);
+
+            //Player row/column
             int playerRow = r.Next(1,16);
             int playerColumn = r.Next(4,35);
 
@@ -47,27 +87,41 @@ namespace Lab
                     {
                         map[kolumn, rad] = outerWall;
                     }
+
                     //Door
-                    else if (rad == 5 && kolumn == 3) //Skapar dörröppning
-                        map[kolumn, rad] = doortile;
+                    else if (rad == 5 && kolumn == 3)
+                        map[kolumn, rad] = whiteDoor;
                     else if (rad == 3 && kolumn == 2)
                         map[kolumn, rad] = redDoor;
 
                     //Keys
-                    else if (rad == randomRow && kolumn == randomColumn)
-                        map[kolumn, rad] = keytile;
-                    else if (rad == randomRow2 && kolumn == randomColumn2)
+                    else if (rad == randomKeyRow && kolumn == randomKeyColumn)
+                        map[kolumn, rad] = whiteKey;
+                    else if (rad == randomKeyRow2 && kolumn == randomKeyColumn2)
                         map[kolumn, rad] = redKey;
+
+                    //Lockpick
+                    else if (rad == 14 && kolumn == 1)
+                        map[kolumn, rad] = lockPick;
 
                     //Traps
                     else if (rad == randomTrapRow && kolumn == randomTrapColumn)
-                        map[kolumn, rad] = new TrapTile();
+                        map[kolumn, rad] = trap;
                     else if (rad == randomTrapRow2 && kolumn == randomTrapColumn2)
-                        map[kolumn, rad] = new TrapTile();
+                        map[kolumn, rad] = trap2;
+                    else if (rad == randomTrapRow3 && kolumn == randomTrapColumn3)
+                        map[kolumn, rad] = trap3;
+                    else if (rad == randomTrapRow4 && kolumn == randomTrapColumn4)
+                        map[kolumn, rad] = trap4;
 
                     //Exit
                     else if (rad == 1 && kolumn == 1)
                         map[kolumn, rad] = exit;
+
+                    //Visable Floor after enter the room
+                    else if (rad == 1 && kolumn == 2 || rad == 2 && kolumn == 1 || rad == 2 && kolumn == 2)
+                        map[kolumn, rad] = visableFloor;
+
 
                     //Inner walls
                     else if (kolumn == 3 || rad == 3 && kolumn == 1)
@@ -82,28 +136,20 @@ namespace Lab
             }
 
 
-            while (!exit.HasExit) //TODO: hur ska användaren avsluta?
+            while (!exit.HasExit)
             {
 
                 if (!map[playerColumn + 1, playerRow].IsVisible)
                     map[playerColumn + 1, playerRow].IsVisible = true;
-                else
-                    map[playerColumn, playerRow].IsVisible = false;
 
                 if (!map[playerColumn, playerRow + 1].IsVisible)
                     map[playerColumn, playerRow + 1].IsVisible = true;
-                else
-                    map[playerColumn, playerRow].IsVisible = false;
 
                 if (!map[playerColumn - 1, playerRow].IsVisible)
                     map[playerColumn - 1, playerRow].IsVisible = true;
-                else
-                    map[playerColumn, playerRow].IsVisible = false;
 
                 if (!map[playerColumn, playerRow - 1].IsVisible)
                     map[playerColumn, playerRow - 1].IsVisible = true;
-                else
-                    map[playerColumn, playerRow].IsVisible = false;
 
                 //Rita ut karta
                 Console.SetCursorPosition(0, 0);
@@ -126,36 +172,48 @@ namespace Lab
 
                 Console.WriteLine($"Score: {charactertile.Score}");
                 Console.WriteLine($"Steps: {charactertile.Steps}");
-                Console.WriteLine($"White keys: {keytile.AmountKeys}/1");
+                Console.WriteLine($"White keys: {whiteKey.AmountKeys}/1");
                 Console.WriteLine($"Red keys: {redKey.AmountRedKeys}/1");
 
 
-                if (map[playerColumn, playerRow] == new TrapTile())
-                    charactertile.Score = charactertile.Score + 30;
+                if (map[playerColumn, playerRow] == trap || map[playerColumn, playerRow] == trap2 || map[playerColumn, playerRow] == trap3 || map[playerColumn, playerRow] == trap4)
+                    charactertile.Score = charactertile.Score + trapPoints;
 
-
-
-
-                if (map[playerColumn,playerRow] == keytile)
+                if (map[playerColumn, playerRow] == lockPick)
                 {
                     map[playerColumn, playerRow] = new FloorTile();
-                    keytile.pickedUp = true;
-                    charactertile.Score = charactertile.Score - reducedPoint;
-                    keytile.AmountKeys++;
+                    lockPick.pickedUp = true;
+                    charactertile.Score = charactertile.Score - lockPickBonus;
+                    Console.SetCursorPosition(40,7);
+                    Console.WriteLine("You found a lockpick");
+                }
+
+
+                if (map[playerColumn,playerRow] == whiteKey)
+                {
+                    map[playerColumn, playerRow] = new FloorTile();
+                    whiteKey.pickedUp = true;
+                    charactertile.Score = charactertile.Score - keyPoints;
+                    whiteKey.AmountKeys++;
                 }
 
                 if (map[playerColumn, playerRow] == redKey)
                 {
                     map[playerColumn, playerRow] = new FloorTile();
                     redKey.pickedUp = true;
-                    charactertile.Score = charactertile.Score - reducedPoint;
+                    charactertile.Score = charactertile.Score - keyPoints;
                     redKey.AmountRedKeys++;
                 }
 
 
 
 
-                
+                if (map[playerColumn, playerRow] == redDoor)
+                {
+                    exit.IsVisible = true;
+                    visableFloor.IsVisible = true;
+                }
+
 
 
 
@@ -172,11 +230,16 @@ namespace Lab
                             charactertile.Steps++;
                         }
  
-                        else if (map[playerColumn, playerRow - 1] == redDoor && redKey.pickedUp)
+                        else if (map[playerColumn, playerRow - 1] == redDoor && redKey.pickedUp || map[playerColumn, playerRow - 1] == redDoor && lockPick.pickedUp)
                         {
                             playerRow--;
                             map[playerColumn, playerRow] = new FloorTile();
-                            redKey.AmountRedKeys--;
+                            visableFloor.IsVisible = true;
+                            exit.IsVisible = true;
+                            if (redKey.AmountRedKeys < 0)
+                                redKey.AmountRedKeys = 0;
+                            else
+                                redKey.AmountRedKeys--;
                         }
 
                         if (map[playerColumn, playerRow] == exit)
@@ -191,11 +254,11 @@ namespace Lab
                             charactertile.Steps++;
                         }
                             
-                        else if(map[playerColumn - 1, playerRow] == doortile && keytile.pickedUp)
+                        else if(map[playerColumn - 1, playerRow] == whiteDoor && whiteKey.pickedUp)
                         {
                             playerColumn--;
                             map[playerColumn, playerRow] = new FloorTile();
-                            keytile.AmountKeys--;
+                            whiteKey.AmountKeys--;
                         }
 
 
@@ -234,10 +297,13 @@ namespace Lab
             }
 
             Console.Clear();
-            Console.WriteLine("You won!!");
+            Console.WriteLine("You won... Yay...");
+            Console.WriteLine();
             Console.WriteLine($"Your score is: {charactertile.Score}");
+            Console.WriteLine();
             Console.WriteLine($"Your steps to complete the game: {charactertile.Steps}");
 
+            Thread.Sleep(6000);
         }
     }
 }

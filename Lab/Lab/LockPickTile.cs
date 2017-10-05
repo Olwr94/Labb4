@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class TrapTile : Tile , ITiles
+    class LockPickTile : Tile, ITiles
     {
-        public TrapTile()
+
+        public bool pickedUp = false;
+        public LockPickTile()
         {
-            Color = ConsoleColor.Cyan;
-            Symbol = (char)Tiles.floor;
+            Color = ConsoleColor.DarkGreen;
+            Symbol = (char)Tiles.lockPick;
 
         }
 

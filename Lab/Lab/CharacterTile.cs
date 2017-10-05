@@ -23,7 +23,7 @@ namespace Lab
         public CharacterTile()
         {
             IsVisible = true; 
-            Color = ConsoleColor.White;
+            Color = ConsoleColor.Magenta;
             Symbol = (char)Tiles.character;
             Score = 0;
         }

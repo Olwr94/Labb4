@@ -48,6 +48,7 @@
     <Compile Include="FloorTile.cs" />
     <Compile Include="ITiles.cs" />
     <Compile Include="KeyTile.cs" />
+    <Compile Include="LockPickTile.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="OuterWallTiles.cs" />
     <Compile Include="Program.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Tile.cs" />
     <Compile Include="InnerWallTile.cs" />
     <Compile Include="TrapTile.cs" />
+    <Compile Include="VisableFloorTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

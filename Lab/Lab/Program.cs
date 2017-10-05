@@ -10,10 +10,15 @@ namespace Lab
     {
         static void Main(string[] args)
         {
+            //Leaderboard
+            //André - Score: 131 & Steg: 151
+            //Emil - Score: 85 & Steg: 112
+            //Daniel - Score: & Steg:
+
             Map map = new Map();
             map.MapArray();
  
-            Console.ReadLine(); 
+            //Console.ReadLine(); 
         }
     }
 }
