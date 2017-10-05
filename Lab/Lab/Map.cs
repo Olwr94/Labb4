@@ -27,9 +27,7 @@ namespace Lab
         
         //Outer walls
         OuterWallTile outerWall = new OuterWallTile();
-
-        //Floor
-        VisableFloorTile visableFloor = new VisableFloorTile();
+        
 
         //Character
         CharacterTile charactertile = new CharacterTile();
@@ -76,8 +74,8 @@ namespace Lab
             int randomTrapColumn4 = r.Next(4, 30);
 
             //Player row/column
-            int playerRow = r.Next(1,16);
-            int playerColumn = r.Next(4,35);
+            int playerRow = r.Next(2,16);
+            int playerColumn = r.Next(4,34);
 
             for (int rad = 0; rad < Rad; rad++)
             {
@@ -88,7 +86,7 @@ namespace Lab
                         map[kolumn, rad] = outerWall;
                     }
 
-                    //Door
+                    //Doors
                     else if (rad == 5 && kolumn == 3)
                         map[kolumn, rad] = whiteDoor;
                     else if (rad == 3 && kolumn == 2)
@@ -118,11 +116,6 @@ namespace Lab
                     else if (rad == 1 && kolumn == 1)
                         map[kolumn, rad] = exit;
 
-                    //Visable Floor after enter the room
-                    else if (rad == 1 && kolumn == 2 || rad == 2 && kolumn == 1 || rad == 2 && kolumn == 2)
-                        map[kolumn, rad] = visableFloor;
-
-
                     //Inner walls
                     else if (kolumn == 3 || rad == 3 && kolumn == 1)
                         map[kolumn, rad] = new InnerWallTile();
@@ -136,22 +129,31 @@ namespace Lab
             }
 
 
-            while (!exit.HasExit)
+            while (!exit.ExitDoor)
             {
 
+                //Makes the markers visible 1 step in every direction
                 if (!map[playerColumn + 1, playerRow].IsVisible)
                     map[playerColumn + 1, playerRow].IsVisible = true;
+                else
+                    map[playerColumn, playerRow].IsVisible = false;
 
                 if (!map[playerColumn, playerRow + 1].IsVisible)
                     map[playerColumn, playerRow + 1].IsVisible = true;
+                else
+                    map[playerColumn, playerRow].IsVisible = false;
 
                 if (!map[playerColumn - 1, playerRow].IsVisible)
                     map[playerColumn - 1, playerRow].IsVisible = true;
+                else
+                    map[playerColumn, playerRow].IsVisible = false;
 
                 if (!map[playerColumn, playerRow - 1].IsVisible)
                     map[playerColumn, playerRow - 1].IsVisible = true;
+                else
+                    map[playerColumn, playerRow].IsVisible = false;
 
-                //Rita ut karta
+                //Places the player in the map and overwrites the previous map
                 Console.SetCursorPosition(0, 0);
                 for (int rad = 0; rad < Rad; rad++)
                 {
@@ -165,60 +167,74 @@ namespace Lab
                     }
                     Console.WriteLine();
                 }
+
+                //Takes away the Cursor (puts the cursor in the background)
                 Console.CursorLeft = 0;
                 Console.CursorTop = 0;
+
+                //Sets position for counters and stats
                 Console.SetCursorPosition(0, 16);
                 Console.CursorVisible = false;
-
                 Console.WriteLine($"Score: {charactertile.Score}");
                 Console.WriteLine($"Steps: {charactertile.Steps}");
                 Console.WriteLine($"White keys: {whiteKey.AmountKeys}/1");
                 Console.WriteLine($"Red keys: {redKey.AmountRedKeys}/1");
+                
+                //Info screen on the right side
+                Console.SetCursorPosition(38,0);
+                Console.WriteLine("Mission: find the exit");
+                Console.SetCursorPosition(38, 1);
+                Console.WriteLine("Objective: Get as score as possible..");
+                Console.SetCursorPosition(38, 2);
+                Console.WriteLine("D = Doors");
+                Console.SetCursorPosition(38, 3);
+                Console.WriteLine("K = keys");
+                Console.SetCursorPosition(38, 4);
+                Console.WriteLine("# = Walls");
+                Console.SetCursorPosition(38, 5);
+                Console.WriteLine("Hint: Nothing is what it seemes..");
 
 
+                //When you walk on a trap
                 if (map[playerColumn, playerRow] == trap || map[playerColumn, playerRow] == trap2 || map[playerColumn, playerRow] == trap3 || map[playerColumn, playerRow] == trap4)
+                {
                     charactertile.Score = charactertile.Score + trapPoints;
+                    Console.SetCursorPosition(38, 6);
+                    Console.WriteLine(" ____________________________________");
+                    Console.SetCursorPosition(38, 7);
+                    Console.WriteLine("|Woopsie.. watch out for them traps..|");
+                    Console.SetCursorPosition(38, 8);
+                    Console.WriteLine("|You just gained 30 points..         |");
+                    Console.SetCursorPosition(38, 9);
+                    Console.WriteLine("|____________________________________|");
+                }
 
+                //When you pick up an item
                 if (map[playerColumn, playerRow] == lockPick)
                 {
                     map[playerColumn, playerRow] = new FloorTile();
-                    lockPick.pickedUp = true;
+                    lockPick.PickedUp = true;
                     charactertile.Score = charactertile.Score - lockPickBonus;
-                    Console.SetCursorPosition(40,7);
+                    Console.SetCursorPosition(38,13);
                     Console.WriteLine("You found a lockpick");
                 }
-
-
                 if (map[playerColumn,playerRow] == whiteKey)
                 {
                     map[playerColumn, playerRow] = new FloorTile();
-                    whiteKey.pickedUp = true;
+                    whiteKey.PickedUp = true;
                     charactertile.Score = charactertile.Score - keyPoints;
                     whiteKey.AmountKeys++;
                 }
-
                 if (map[playerColumn, playerRow] == redKey)
                 {
                     map[playerColumn, playerRow] = new FloorTile();
-                    redKey.pickedUp = true;
+                    redKey.PickedUp = true;
                     charactertile.Score = charactertile.Score - keyPoints;
                     redKey.AmountRedKeys++;
                 }
+                
 
-
-
-
-                if (map[playerColumn, playerRow] == redDoor)
-                {
-                    exit.IsVisible = true;
-                    visableFloor.IsVisible = true;
-                }
-
-
-
-
-
-
+                //Movement
                 var player = Console.ReadKey(true);
                 switch(player.Key)
                 {
@@ -229,21 +245,21 @@ namespace Lab
                             charactertile.Score++;
                             charactertile.Steps++;
                         }
- 
-                        else if (map[playerColumn, playerRow - 1] == redDoor && redKey.pickedUp || map[playerColumn, playerRow - 1] == redDoor && lockPick.pickedUp)
+
+                        //unlock door
+                        else if (map[playerColumn, playerRow - 1] == redDoor && redKey.PickedUp || map[playerColumn, playerRow - 1] == redDoor && lockPick.PickedUp)
                         {
                             playerRow--;
-                            map[playerColumn, playerRow] = new FloorTile();
-                            visableFloor.IsVisible = true;
                             exit.IsVisible = true;
-                            if (redKey.AmountRedKeys < 0)
+                            map[playerColumn, playerRow] = new FloorTile();
+                            if (redKey.AmountRedKeys < 1)
                                 redKey.AmountRedKeys = 0;
                             else
                                 redKey.AmountRedKeys--;
                         }
 
                         if (map[playerColumn, playerRow] == exit)
-                            exit.HasExit = true;
+                            exit.ExitDoor = true;
                         break;
                      
                      case ConsoleKey.A:
@@ -254,7 +270,7 @@ namespace Lab
                             charactertile.Steps++;
                         }
                             
-                        else if(map[playerColumn - 1, playerRow] == whiteDoor && whiteKey.pickedUp)
+                        else if(map[playerColumn - 1, playerRow] == whiteDoor && whiteKey.PickedUp)
                         {
                             playerColumn--;
                             map[playerColumn, playerRow] = new FloorTile();
@@ -263,7 +279,7 @@ namespace Lab
 
 
                         if (map[playerColumn, playerRow] == exit)
-                            exit.HasExit = true;
+                            exit.ExitDoor = true;
                         break;
 
                      case ConsoleKey.S:
@@ -273,10 +289,9 @@ namespace Lab
                             charactertile.Score++;
                             charactertile.Steps++;
                         }
-                                                
 
                         if (map[playerColumn, playerRow] == exit)
-                            exit.HasExit = true;
+                            exit.ExitDoor = true;
                         break;
 
                      case ConsoleKey.D:
@@ -289,13 +304,14 @@ namespace Lab
                          
 
                         if (map[playerColumn, playerRow] == exit)
-                            exit.HasExit = true;
+                            exit.ExitDoor = true;
                         break;
 
                 }
                 
             }
-
+            
+            //End scene
             Console.Clear();
             Console.WriteLine("You won... Yay...");
             Console.WriteLine();
@@ -303,6 +319,7 @@ namespace Lab
             Console.WriteLine();
             Console.WriteLine($"Your steps to complete the game: {charactertile.Steps}");
 
+            //Pauses screen for 6 sec
             Thread.Sleep(6000);
         }
     }

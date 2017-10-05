@@ -8,15 +8,15 @@ namespace Lab
 {
     class LockPickTile : Tile, ITiles
     {
-
-        public bool pickedUp = false;
+        //Sets color, chooses symbol and pickable
         public LockPickTile()
         {
+            PickedUp = false;
             Color = ConsoleColor.DarkGreen;
             Symbol = (char)Tiles.lockPick;
-
         }
 
+        //Prints symbol
         public void Print()
         {
             Console.Write(Symbol);

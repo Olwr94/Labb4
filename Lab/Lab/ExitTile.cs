@@ -8,15 +8,15 @@ namespace Lab
 {
     class ExitTile: Tile, ITiles
     {
-         
-        
+        //Sets color, chooses symbol and creates exit option.
         public ExitTile()
         {
             Color = ConsoleColor.Magenta;
             Symbol = (char)Tiles.exit;
-            HasExit = false;
+            ExitDoor = false;
         }
 
+        //Prints symbol
         public void Print()
         {
             Console.Write(Symbol);

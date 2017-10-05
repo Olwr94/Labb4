@@ -8,6 +8,7 @@ namespace Lab
 {
     class OuterWallTile : Tile, ITiles
     {
+        //Sets color, chooses symbol and makes it uncolliedable and always visible
         public OuterWallTile()
         {
             IsVisible = true;
@@ -16,6 +17,7 @@ namespace Lab
             CanCollide = true;
         }
 
+        //Prints symbol
         public void Print()
         {
             Console.Write(Symbol);

@@ -58,7 +58,6 @@
     <Compile Include="Tile.cs" />
     <Compile Include="InnerWallTile.cs" />
     <Compile Include="TrapTile.cs" />
-    <Compile Include="VisableFloorTile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

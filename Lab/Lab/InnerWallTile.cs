@@ -8,6 +8,7 @@ namespace Lab
 {
     class InnerWallTile : Tile, ITiles
     {
+        //Sets color, chooses symbol and makes it uncolliedable
         public InnerWallTile()
         {
             Color = ConsoleColor.DarkMagenta; 
@@ -15,6 +16,7 @@ namespace Lab
             CanCollide = true;
         }
 
+        //Prints symbols
         public void Print()
         {
             Console.Write(Symbol); 

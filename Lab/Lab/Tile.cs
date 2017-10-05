@@ -19,19 +19,12 @@ namespace Lab
             character = '@'
         }
 
+        //Makes visible/invisible
         private bool isVisible = false;
-
         public bool IsVisible
         {
             get { return isVisible; }
             set { isVisible = value; }
-        }
-
-        private ConsoleColor color;
-        public ConsoleColor Color
-        {
-            get { return color; }
-            set { color = value; }
         }
 
         public void Draw()
@@ -44,27 +37,44 @@ namespace Lab
             Console.ResetColor();
         }
 
+        //Change color
+        private ConsoleColor color;
+        public ConsoleColor Color
+        {
+            get { return color; }
+            set { color = value; }
+        }
+        
+        //Gets/Sets symbol
         private char symbol; 
-
         public char Symbol 
         { 
             get { return symbol; }
             set { symbol = value; }
         }
 
+        //Makes so you can not walk on/through them
         private bool canCollide;
-
         public bool CanCollide 
         {
             get { return canCollide;}
             set { canCollide = value;}
         }
 
-        private bool hasExit;
-        public bool HasExit
+        //Pick up items
+        private bool pickedUp = false;
+        public bool PickedUp
         {
-            get { return hasExit; }
-            set { hasExit = value; }
+            get { return pickedUp; }
+            set { pickedUp = value; }
+        }
+
+        //Exit
+        private bool exitDoor;
+        public bool ExitDoor
+        {
+            get { return exitDoor; }
+            set { exitDoor = value; }
         }
 
     }
