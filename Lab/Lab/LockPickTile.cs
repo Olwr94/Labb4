@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class ExitTile: Tile, ITiles
+    class LockPickTile : Tile, ITiles
     {
-        //Sets color, chooses symbol and creates exit option.
-        public ExitTile()
+        //Sets color, chooses symbol and pickable
+        public LockPickTile()
         {
-            Color = ConsoleColor.Magenta;
-            Symbol = (char)Tiles.exit;
-            ExitDoor = false;
+            PickedUp = false;
+            Color = ConsoleColor.DarkGreen;
+            Symbol = (char)Tiles.lockPick;
         }
 
         //Prints symbol

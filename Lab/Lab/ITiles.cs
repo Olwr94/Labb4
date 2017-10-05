@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab
 { 
+    //Interface to print out
     interface ITiles
     {
         void Print(); 

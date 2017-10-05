@@ -8,6 +8,7 @@ namespace Lab
 {
     class RedDoorTile : Tile , ITiles
     {
+        //Sets color, chooses symbol and makes it uncolliedable
         public RedDoorTile()
         {
             Color = ConsoleColor.Red;
@@ -15,6 +16,7 @@ namespace Lab
             CanCollide = true;
         }
 
+        //Prints out symbol
         public void Print()
         {
             Console.Write(Symbol);

@@ -48,6 +48,7 @@
     <Compile Include="FloorTile.cs" />
     <Compile Include="ITiles.cs" />
     <Compile Include="KeyTile.cs" />
+    <Compile Include="LockPickTile.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="OuterWallTiles.cs" />
     <Compile Include="Program.cs" />
