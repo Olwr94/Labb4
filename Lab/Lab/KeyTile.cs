@@ -12,12 +12,16 @@ namespace Lab
         public bool pickedUp = false;
         public KeyTile()
         {
-            Color = ConsoleColor.White; 
-            IsVisible = true;
+            Color = ConsoleColor.White;
             Symbol = (char)Tiles.key;
             
         }
-
+        private int amountKeys;
+        public int AmountKeys
+        {
+            get { return amountKeys; }
+            set { amountKeys = value; }
+        }
         public void Print()
         {
             Console.Write(Symbol);

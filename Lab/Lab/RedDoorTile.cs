@@ -10,7 +10,6 @@ namespace Lab
     {
         public RedDoorTile()
         {
-            IsVisible = true;
             Color = ConsoleColor.Red;
             Symbol = (char)Tiles.door;
             CanCollide = true;

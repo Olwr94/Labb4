@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class WallTile : Tile, ITiles
+    class InnerWallTile : Tile, ITiles
     {
-        public WallTile()
+        public InnerWallTile()
         {
-            IsVisible = true;
             Color = ConsoleColor.White; 
             Symbol = (char)Tiles.wall;
             CanCollide = true;

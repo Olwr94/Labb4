@@ -12,7 +12,6 @@ namespace Lab
         
         public ExitTile()
         {
-            IsVisible = true;
             Color = ConsoleColor.White;
             Symbol = (char)Tiles.exit;
             HasExit = false;
