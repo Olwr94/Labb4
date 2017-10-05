@@ -8,13 +8,14 @@ namespace Lab
 {
     class FloorTile : Tile, ITiles
     {
+        //Sets color and chooses symbol
         public FloorTile()
         {
-            IsVisible = true;
             Color = ConsoleColor.White;
             Symbol = (char)Tiles.floor; 
         }
 
+        //Prints symbol
         public void Print()
         {
             Console.Write(Symbol); 

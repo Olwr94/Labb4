@@ -5,10 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Lab
-{ 
-    //Interface to print out
-    interface ITiles
+{
+    class Key_s_
     {
-        void Print(); 
     }
 }

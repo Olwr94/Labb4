@@ -8,14 +8,15 @@ namespace Lab
 {
     class DoorTile : Tile, ITiles
     {
+        //Sets color, chooses symbol and makes it uncolliedable
         public DoorTile()
         {
-            IsVisible = true;
             Color = ConsoleColor.White; 
             Symbol = (char)Tiles.door;
             CanCollide = true;
         }
 
+        //Prints symbols
         public void Print()
         {
             Console.Write(Symbol); 

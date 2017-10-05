@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Lab
 {
-    class RedDoorTile : Tile , ITiles
+    class TrapTile : Tile , ITiles
     {
-        //Sets color, chooses symbol and makes it uncolliedable
-        public RedDoorTile()
+        //Sets color and chooses symbol
+        public TrapTile()
         {
-            Color = ConsoleColor.Red;
-            Symbol = (char)Tiles.door;
-            CanCollide = true;
+            Color = ConsoleColor.Cyan;
+            Symbol = (char)Tiles.floor;
         }
 
         //Prints out symbol
