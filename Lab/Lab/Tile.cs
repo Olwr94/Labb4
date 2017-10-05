@@ -15,6 +15,7 @@ namespace Lab
             key = 'k', 
             door = 'D',
             exit = 'E',
+            trap = '~',
             character = '@'
         }
 

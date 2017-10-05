@@ -14,6 +14,12 @@ namespace Lab
             get { return score; }
             set { score = value; }
         }
+        private int steps;
+        public int Steps
+        {
+            get { return steps; }
+            set { steps = value; }
+        }
         public CharacterTile()
         {
             IsVisible = true; 
